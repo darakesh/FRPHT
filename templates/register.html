@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}| Register{% endblock %}
+
+{% load  crispy_forms_tags %}
+
+{% block basecontent %}
+<div class="wrapper">
+    <div id="formContentreg">
+      <div >
+        <h2 class="logintxt" >Registeration Form</h2>
+        <hr>
+      </div>
+      <div class="container">
+        {% crispy RegisterForm %}
+      </div>
+    </div>
+</div>
+{% endblock %}

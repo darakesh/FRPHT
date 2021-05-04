@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>FRPHT {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/mainbody.css' %}">
+    <link rel="stylesheet" href="{% static 'css/medtable.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loginpage.css' %}">
+    {% include 'cssfiles.html' %}
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+      {% block basecontent %}
+      {% endblock %}
+    {% include 'jsfiles.html' %}
+  </body>
+</html>

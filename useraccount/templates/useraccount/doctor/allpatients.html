@@ -1,0 +1,53 @@
+{% extends 'useraccount/homepage.html' %}
+
+{% block title%}| All Patients{% endblock %}
+
+{% block homecontent %}
+
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Patients List</h2>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Blood Group</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for patient in patients %}
+          {% if patient.is_superuser or patient.is_doctor %}
+          <!-- continue -->
+          {% else %}
+            <tr>
+              <td>{{forloop.counter0|add:"-1"}}</td>
+              <td>{{patient.userID}}</td>
+              <td>{{patient.username}}</td>
+              <td>{{patient.age}}</td>
+              <td>{{patient.gender}}</td>
+              <td>{{patient.blood_group}}</td>
+              <td>
+                <a href="{% url 'patientprofile' patient.userID %}"><input type="button" class = "btn btn-outline-primary" name="view" value="View"></a>
+              </td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

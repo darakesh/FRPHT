@@ -1,0 +1,29 @@
+
+{% extends 'useraccount/patientinfo.html' %}
+
+<!-- Delete Modal HTML -->
+
+{% block addmed %}
+{% endblock %}
+
+{% block tableblock %}
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="modal-header">
+					<h4 class="modal-title">Delete Medication</h4>
+				</div>
+				<div class="modal-body">
+					<p>Are you sure you want to delete {{meditem.drugs}} Medication?</p>
+					<p class="text-warning"><small>This action cannot be undone.</small></p>
+				</div>
+				<div class="modal-footer">
+				     <a href="{% url 'patientprofile' meditem.patient_ID %}"><input type="button" class="btn btn-default" value="Cancel"></a>
+				     <input type="submit" class="btn btn-danger" name='Delete' value="Delete">
+				</div>
+			</form>
+
+		</div>
+	</div>
+{% endblock %}

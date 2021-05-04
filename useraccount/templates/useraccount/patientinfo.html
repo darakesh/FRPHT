@@ -1,0 +1,109 @@
+{% extends 'useraccount/homepage.html' %}
+{% block title%}| Info{% endblock %}
+
+{% block homecontent %}
+<div class="d-flex">
+<!-- patientprofile info -->
+<div class="my-auto" style="flex-basis:25%;">
+  <div class=container-xl>
+  <div class="col">
+     <div class="p-5 rounded-xs shadow">
+         <img align = "center" src="{{patient.userphoto.url}}" width = "200px", height = "200px" alt="">
+         <hr>
+         <h3 class="text-dark">{{patient.username}}</h3>
+         <p class="border-bottom pb-4"><b>ID</b> - {{patient.userID}}</p>
+         <ul class="list-unstyled">
+             <li class="d-flex mb-4"> <i class="fa fa-user icon-primary"></i>
+                 <div class="pl-3">
+                     <h6 class="text-dark">General Details</h6>
+                     <ul class="list-unstyled">
+                         <li>Father Name - {{patient.father_name}}</li>
+                         <li>Age - {{patient.age}}</li>
+                         <li>Gender - {{patient.gender}}</li>
+                         <li>Blood Group - {{patient.blood_group}}</li>
+                     </ul>
+                 </div>
+             </li>
+             <li class="d-flex mb-4"> <i class="fa fa-envelope-o icon-primary"></i>
+                 <div class="pl-3">
+                     <h6 class="text-dark">Email</h6>
+                     <ul class="list-unstyled">
+                         <li>{{patient.email}}</li>
+                     </ul>
+                 </div>
+             </li>
+             <li class="d-flex mb-4"> <i class="fa fa-phone icon-primary"></i>
+                 <div class="pl-3">
+                     <h6 class="text-dark">Mobile</h6>
+                     <ul class="list-unstyled">
+                         <li>{{patient.number}}</li>
+                         <li>{{patient.emergency_number}}</li>
+                     </ul>
+                 </div>
+             </li>
+             <li class="d-flex mb-4">
+                 <div class="pl-3">
+                    <a href="{% url 'edituser' patient.userID %}"><input type="button" class="btn btn-outline-primary" name="edit" value="Edit"></a>
+                    {% if user.is_superuser %}
+                    <a href="{% url 'deleteuser' patient.userID %}"><input type="button" class="btn btn-outline-danger" name="delete" value="Delete"></a>
+                     {% endif %}
+                     <a href="{% url 'home' %}"><input type="button" class="btn btn-secondary" name="home" value="home"></a>
+                 </div>
+             </li>
+         </ul>
+     </div>
+   </div>
+ </div>
+</div>
+
+<!-- medication table -->
+<div class="flex-grow-1">
+  <div class="container-xl" >
+  	<div class="table-responsive">
+  		<div class="table-wrapper">
+  			<div class="table-title">
+  				<div class="row">
+  					<div class="col-sm-6">
+  						<h2><b>Medication</b> Details</h2>
+  					</div>
+  					{% block addmed %}
+  					<div class="col-sm-6">
+  						<a href="{% url 'addmed' patient.userID %}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New Medication</span></a>
+  					</div>
+  					{% endblock%}
+  				</div>
+  			</div>
+        {% block tableblock %}
+        <table class="table table-striped table-hover">
+  				<thead>
+  					<tr>
+  						<th>#</th>
+  						<th>Date</th>
+  						<th>Doctor Name</th>
+  						<th>Reason</th>
+  						<th>Drugs</th>
+  						<th>Actions</th>
+  					</tr>
+  				</thead>
+  				<tbody>
+  					{% for med in medications %}
+  					<tr>
+  						<td>{{forloop.counter}}</td>
+  						<td>{{med.date}}</td>
+  						<td>{{med.doctor_name}}</td>
+  						<td>{{med.reason}}</td>
+  						<td>{{med.drugs}}</td>
+  						<td>
+  							<a href="{% url 'editmed' med.id %}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+  							<a href="{% url 'deletemed' med.id %}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+  						</td>
+  					</tr>
+  					{% endfor %}
+  					</table>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

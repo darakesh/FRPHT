@@ -1,0 +1,29 @@
+{% extends 'useraccount/patientinfo.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block addmed %}
+{% endblock %}
+
+{% block tableblock %}
+<!-- Add Modal HTML -->
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="modal-header">
+					<h4 class="modal-title">{{head}} Medication</h4>
+				</div>
+				<div class="modal-body">
+						{{medform|crispy}}
+					</div>
+				<div class="modal-footer">
+				<a href="{% url 'patientprofile' patient.userID %}"><input type="button" class="btn btn-outline-secondary" value="Cancel"></a>
+				<input type="submit" class="btn btn-success" name= "submit" value="{{button}}">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

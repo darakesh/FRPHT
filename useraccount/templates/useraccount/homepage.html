@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title%}| Home{% endblock %}
+
+{% block basecontent %}
+<div class="mb-auto">
+  {% include 'navbar.html' %}
+</div>
+<div >
+  {% block homecontent %}
+  <div class="my-auto">
+    <div class="container">
+      <div class="text-center">
+          <h1>Welcome to</h1>
+          <h1>Facial Recognition Patient History Tracking System</h1>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>
+<div class="mt-auto" >
+  <hr>
+  <h6 align="center">&copy;FacialRecognitionPatientHistoryTracking</h6>
+</div>
+{% endblock %}

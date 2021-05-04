@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block title %}| Login{% endblock %}
+
+
+{% block basecontent %}
+
+<h2  class ="titletxt" > Facial Recognition Patient History Tracking System </h2>
+
+<div class="wrapper ">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <div >
+      <h2 class="logintxt" >Login</h2>
+      <hr>
+    </div>
+
+    <!-- Login Form -->
+    <div class="container">
+      <form method="POST">
+        {% csrf_token %}
+        {{LoginForm|crispy}}
+        <input type="submit" class ="logbtn" value="Log In">
+        {% for message in messages %}
+          {% if message.tags == 'error' %}
+          <p class="alert alert-danger" role="alert">{{message}}<p>
+          {% elif message.tags == 'success' %}
+          <p class="alert alert-success" role="alert">{{message}}<p>
+          {% else %}
+          <p class="alert alert-info" role="alert">{{message}}<p>
+          {% endif %}
+        {% endfor %}
+      </form>
+    </div>
+   <!-- register  -->
+    <div id="formFooter">
+      <p>Don't Have an Account?</p>
+      <a href="{% url 'register' %}"><input type ='button' class="regbtn" name="register" value = 'Register Here'></a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
