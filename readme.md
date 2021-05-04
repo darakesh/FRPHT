@@ -1,12 +1,13 @@
 # FRPHT
 Facial recognition Patient history tracking is a web application uses open cv to recognize patient's face from database and track, update and delete the medical records of that patient.
 
-##user types:
-1.Patient
-2.Doctor
-3.Admin
+## user types:
+ - Patient
+ - Doctor
+ - Admin
 
 Functionality:
+
  patient:
   - view, edit, delete existing medical records
   - add  a new medical record
@@ -24,6 +25,7 @@ Functionality:
   - view all users in list
 
 Functionality need to add:
+
  Doctor:
  - search patients using patient name or ID
  - search patient using image file(photo)
