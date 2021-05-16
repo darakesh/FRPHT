@@ -28,11 +28,8 @@
         </thead>
         <tbody>
           {% for patient in patients %}
-          {% if patient.is_superuser or patient.is_doctor %}
-          <!-- continue -->
-          {% else %}
             <tr>
-              <td>{{forloop.counter0|add:"-1"}}</td>
+              <td>{{forloop.counter}}</td>
               <td>{{patient.userID}}</td>
               <td>{{patient.username}}</td>
               <td>{{patient.age}}</td>
@@ -42,7 +39,6 @@
                 <a href="{% url 'patientprofile' patient.userID %}"><input type="button" class = "btn btn-outline-primary" name="view" value="View"></a>
               </td>
             </tr>
-            {% endif %}
           {% endfor %}
         </tbody>
       </table>

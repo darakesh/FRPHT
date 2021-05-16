@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib import messages
 
 
 from useraccount.models import Medication
@@ -26,7 +27,7 @@ def userprofileview(request):
 @login_required
 @permission_required('is_superuser')
 def allusersview(request):
-    users = Account.objects.all()
+    users = Account.objects.exclude(is_superuser = True)
     context = {'accounts':users}
     return render(request,'useraccount/users/allusers.html',context)
 
@@ -34,12 +35,27 @@ def allusersview(request):
 @permission_required('is_doctor')
 def findpatientview(request):
     context = {}
+    if request.method == "GET":
+        if request.GET.get('search') == "Search":
+            sval = request.GET.get("searchbox")
+            if sval == "" or sval == " " :
+                messages.error(request,"Enter Patient ID or Name")
+                return redirect("findpatient")
+            p_list = Account.objects.filter(userID__icontains = sval) | Account.objects.filter(username__icontains = sval)
+            p_list = p_list.exclude(is_doctor = True)
+            if not p_list:
+                messages.error(request,"Patient not Found!")
+            else:
+                context = {"p_list":p_list}
+        if request.GET.get('search') == "Search by Face":
+            print("search by face is clicked")
+        
     return render(request,'useraccount/doctor/findpatient.html',context)
 
 @login_required
 @permission_required('is_doctor')
 def allpatientsview(request):
-    patients = Account.objects.all()
+    patients = Account.objects.exclude(is_doctor = True)
     context = {'patients':patients}
     return render(request,'useraccount/doctor/allpatients.html',context)
 

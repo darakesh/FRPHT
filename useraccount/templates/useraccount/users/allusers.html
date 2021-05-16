@@ -33,11 +33,8 @@
         </thead>
         <tbody>
           {% for acc in accounts %}
-          {% if acc.is_superuser %}
-          <!-- continue -->
-          {% else %}
             <tr>
-              <td>{{forloop.counter|add:"-1"}}</td>
+              <td>{{forloop.counter}}</td>
               <td>{{acc.userID}}</td>
               <td>{{acc.username}}</td>
               <td>{{acc.email}}</td>
@@ -47,7 +44,6 @@
                 <a href="{% url 'patientprofile' acc.userID %}"><input type="button" class = "btn btn-outline-info" name="view" value="view"></a>
               </td>
             </tr>
-            {% endif %}
           {% endfor %}
         </tbody>
       </table>
