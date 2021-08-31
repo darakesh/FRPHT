@@ -17,16 +17,11 @@ Functionality:
   - all patient Functionality
   - view all patients in list
   - edit patient profile
+  - search patients using patient name or ID
+  - search patient from live video feed
 
  Admin:
   - all Doctor Functionality
   - create users
   - delete users
   - view all users in list
-
-Functionality need to add:
-
- Doctor:
- - search patients using patient name or ID
- - search patient using image file(photo)
- - search patient from live video feed
